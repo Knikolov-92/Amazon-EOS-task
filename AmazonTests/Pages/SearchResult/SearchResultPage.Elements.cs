@@ -13,5 +13,12 @@ namespace AmazonTests.Pages.SearchResult
 
         public static readonly By FIRST_RESULT_PAPERBACK_PRICE = By.XPath
                     ("//*[@cel_widget_id='MAIN-SEARCH_RESULTS-1']//a [@class='a-size-base a-link-normal a-text-bold'][normalize-space(text())='Paperback']//following::span[@class='a-price'][1]");
+
+        public static readonly By PRICE_SYMBOL = By.XPath
+                    ("//*[@cel_widget_id='MAIN-SEARCH_RESULTS-1']//a [@class='a-size-base a-link-normal a-text-bold'][normalize-space(text())='Paperback']//following::span[@class='a-price-symbol'][1]");
+        public static readonly By PRICE_WHOLE = By.XPath
+                    ("//*[@cel_widget_id='MAIN-SEARCH_RESULTS-1']//a [@class='a-size-base a-link-normal a-text-bold'][normalize-space(text())='Paperback']//following::span[@class='a-price-whole'][1]");
+        public static readonly By PRICE_FRACTION = By.XPath
+                    ("//*[@cel_widget_id='MAIN-SEARCH_RESULTS-1']//a [@class='a-size-base a-link-normal a-text-bold'][normalize-space(text())='Paperback']//following::span[@class='a-price-fraction'][1]");
     }
 }
