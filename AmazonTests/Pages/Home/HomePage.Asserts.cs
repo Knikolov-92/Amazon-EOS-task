@@ -16,7 +16,7 @@ namespace AmazonTests.Pages.Home
             Assert.Multiple( () =>
             {
                 Assert.That(actualUrl, Is.EqualTo(expectedUrl) );
-                Assert.That(actualTitle.StartsWith(expectedTitle));
+                Assert.That(actualTitle.StartsWith(expectedTitle) );
             });
         }
     }

@@ -1,5 +1,7 @@
 ﻿using AmazonTests.Pages.Home;
+using AmazonTests.Pages.SearchResult;
 using NUnit.Framework;
+using System;
 using System.Threading;
 
 namespace AmazonTests.Tests.E2E
@@ -8,6 +10,7 @@ namespace AmazonTests.Tests.E2E
     public class AddBookToBasket : BaseTest
     {
         private HomePage _homePage;
+        private SearchResultPage _searchResultPage;
 
 
         [SetUp]
@@ -15,17 +18,27 @@ namespace AmazonTests.Tests.E2E
         {
             InitializeBrowser();
             _homePage = new HomePage(Driver);
+            _searchResultPage = new SearchResultPage(Driver);
 
             _homePage.Open();
             _homePage.AssertHomePageisLoaded();
-            Thread.Sleep(5000);
+            _homePage.AcceptCookies();                        
         }
 
-        //[TestCase("Harry Potter and the Cursed Child")]
-        [Test]
-        public void BasketIsUpdatedCorrectly_When_aBookisAdded()
+        [TestCase("Harry Potter and the Cursed Child 1 & 2",
+                  "Harry Potter and the Cursed Child - Parts One and Two: The Official Playscript of the Original West End Production",
+                  "Paperback" )]
+        public void BasketIsUpdatedCorrectly_When_aBookIsAdded(string bookTitleSearch, string expectedBookTitle, string expectedBookVersion)
         {
+            string expectedBookPrice;
 
+            _homePage.SearchForBook(bookTitleSearch);
+            _searchResultPage.VerifyFirstResultTitle(expectedBookTitle);
+            expectedBookPrice = _searchResultPage.VerifyFirstResultHasPaperbackVersion(expectedBookVersion).Trim();
+            Console.WriteLine("price of search result is:" + expectedBookPrice);
+
+
+            Thread.Sleep(5000);
         }
 
         [TearDown]
