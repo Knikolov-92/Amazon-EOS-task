@@ -50,12 +50,6 @@ namespace AmazonTests.Pages.Base
             });
         }     
 
-        public void WaitUntilElementIsPresent(By elementLocator)
-        {
-            var wait = new WebDriverWait(Driver, TimeSpan.FromMilliseconds(_maxWaitTime));
-            wait.Until(ExpectedConditions.ElementExists(elementLocator));
-        }
-
         public void WaitUntilPageIsLoaded()
         {
             IJavaScriptExecutor js = (IJavaScriptExecutor)Driver;

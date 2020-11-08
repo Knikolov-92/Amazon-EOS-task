@@ -11,7 +11,7 @@ namespace AmazonTests.Pages.SearchResult
         {
             WaitUntilElementIsDisplayed(FIRST_RESULT_TITLE);
             string actualTitle = Driver.FindElement(FIRST_RESULT_TITLE).Text;
-            Console.WriteLine("actual title:" + actualTitle);
+            
             Assert.That(actualTitle, Is.EqualTo(expectedTitle));
         }
 

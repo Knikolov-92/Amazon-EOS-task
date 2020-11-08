@@ -3,8 +3,7 @@ using AmazonTests.Pages.Home;
 using AmazonTests.Pages.Product;
 using AmazonTests.Pages.SearchResult;
 using NUnit.Framework;
-using System;
-using System.Threading;
+
 
 namespace AmazonTests.Tests.E2E
 {
@@ -37,18 +36,38 @@ namespace AmazonTests.Tests.E2E
         {
             string expectedBookPrice;
 
-            _homePage.SearchForBook(bookTitleSearch);
-            _searchResultPage.VerifyFirstResultTitle(expectedBookTitle);
-            expectedBookPrice = _searchResultPage.VerifyFirstResultHasPaperbackVersion(expectedBookVersion).Trim();
-            _searchResultPage.OpenFirstResultProduct();
+            //TC design:
+            //1. search for a book(name)
+            //2. verify first result is a book with expectedTitle
+            //3. verify first result is a book that has "paperback" version available and return given price
+            //4. click on first result(title)
+            //5. select 'paperback' version of book
+            //6. verify info of current open product is correct
+            //7. add product to basket
+            //8. mark product as a gift
+            //9. verify product is added to basket correctly
+            //10. go to basket page using the navigation bar
+            //11. verify product(book) info is updated correctly in the basket
+
+
+            _homePage.SearchForBook(bookTitleSearch);    
+            
+            _searchResultPage.VerifyFirstResultTitle(expectedBookTitle);            
+            expectedBookPrice = _searchResultPage.VerifyFirstResultHasPaperbackVersion(expectedBookVersion).Trim();   
+            
+            _searchResultPage.OpenFirstResultProduct();            
             _productPage.SelectPaperbackVersion();
-            _productPage.VerifyPaperBackVersionIsSelected(expectedBookTitle, expectedBookVersion, expectedBookPrice);
+
+            _productPage.VerifyPaperbackVersionIsSelected(expectedBookTitle, expectedBookVersion, expectedBookPrice);
+            
             _productPage.AddProductToBasket();
             _basketPage.MarkAddedProductAsGift();
-            _basketPage.VerifyProductIsAddedToBasketCorrectly("Basket subtotal (1 item): ", expectedBookPrice);
 
-
-            Thread.Sleep(5000);
+            _basketPage.VerifyProductIsAddedToBasketCorrectly("Basket subtotal (1 item): ", expectedBookPrice); 
+            
+            _homePage.NavigateToBasketPage();
+            
+            _basketPage.VerifySubTotalInformation(expectedBookTitle, expectedBookVersion, expectedBookPrice);
         }
 
         [TearDown]

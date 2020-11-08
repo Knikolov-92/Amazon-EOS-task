@@ -6,7 +6,7 @@ namespace AmazonTests.Pages.Product
     public partial class ProductPage : BasePage
     {
 
-        public void VerifyPaperBackVersionIsSelected(string expectedBookTitle, string expectedBookVersion, string expectedBookPrice)
+        public void VerifyPaperbackVersionIsSelected(string expectedBookTitle, string expectedBookVersion, string expectedBookPrice)
         {
             string actualBookTitle = Driver.FindElement(BOOK_TITLE).Text;
             string actualBookVersion = Driver.FindElement(BOOK_SUBTITLE).Text;

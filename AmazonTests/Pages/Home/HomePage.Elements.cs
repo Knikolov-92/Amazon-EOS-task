@@ -12,6 +12,6 @@ namespace AmazonTests.Pages.Home
         public static readonly By SEARCH_CATEGORY_DROPDOWN = By.Id("searchDropdownBox");
         public static readonly By SEARCH_FIELD = By.Id("twotabsearchtextbox");
         public static readonly By SEARCH_GO_BUTTON = By.XPath("//*[@id='nav-search-submit-text']/*[@class='nav-input']");
-        
+        public static readonly By NAV_BASKET_BUTTON = By.XPath("//a[@id='nav-cart']");        
     }
 }

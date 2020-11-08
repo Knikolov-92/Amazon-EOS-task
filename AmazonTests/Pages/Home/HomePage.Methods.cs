@@ -35,5 +35,11 @@ namespace AmazonTests.Pages.Home
 
             categoryDropDown.SelectByText(categoryName);
         }
+
+        public void NavigateToBasketPage()
+        {
+            ClickOn(NAV_BASKET_BUTTON);
+            WaitUntilPageIsLoaded();
+        }
     }
 }

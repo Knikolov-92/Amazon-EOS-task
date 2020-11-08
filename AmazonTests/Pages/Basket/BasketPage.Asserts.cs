@@ -20,5 +20,22 @@ namespace AmazonTests.Pages.Basket
                 Assert.That(productAddedAsGift, Is.EqualTo(true));
             });           
         }
+
+        public void VerifySubTotalInformation(string expectedBookTitle, string expectedBookVersion,string expectedTotalPrice)
+        {
+            string expectedSubTotalText = "Subtotal (1 item):";
+            string actualSubTotalText = Driver.FindElement(SUBTOTAL_TEXT).Text;
+            string actualBookTitle = Driver.FindElement(FIRST_PRODUCT_TITLE).Text;
+            string actualBookVersion = Driver.FindElement(FIRST_PRODUCT_VERSION).Text;
+            string actualTotalPrice = Driver.FindElement(SUBTOTAL_AMOUNT).Text;
+
+            Assert.Multiple(() =>
+            {
+                Assert.That(actualSubTotalText, Is.EqualTo(expectedSubTotalText) );
+                Assert.That(actualBookTitle, Is.EqualTo(expectedBookTitle) );
+                Assert.That(actualBookVersion, Is.EqualTo(expectedBookVersion) );
+                Assert.That(actualTotalPrice, Is.EqualTo(expectedTotalPrice));
+            });
+        }
     }
 }
