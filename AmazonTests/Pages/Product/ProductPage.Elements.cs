@@ -12,6 +12,8 @@ namespace AmazonTests.Pages.Product
         public static readonly By BOOK_SUBTITLE = By.XPath("//*[@id='title']//span [@id='productSubtitle']");
         public static readonly By BOOK_PRICE = By.XPath
             ("//*[@id='buyNewSection']//span [@class='a-size-medium a-color-price offer-price a-text-normal']");
+
+        public static readonly By ADD_TO_CART_BUTTON = By.XPath("//input [@id='add-to-cart-button']");
         
     }
 }

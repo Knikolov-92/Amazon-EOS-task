@@ -1,4 +1,5 @@
-﻿using AmazonTests.Pages.Home;
+﻿using AmazonTests.Pages.Basket;
+using AmazonTests.Pages.Home;
 using AmazonTests.Pages.Product;
 using AmazonTests.Pages.SearchResult;
 using NUnit.Framework;
@@ -13,6 +14,7 @@ namespace AmazonTests.Tests.E2E
         private HomePage _homePage;
         private SearchResultPage _searchResultPage;
         private ProductPage _productPage;
+        private BasketPage _basketPage;
 
         [SetUp]
         public void OpenBrowserWindowAndNavigateToHomePage()
@@ -21,6 +23,7 @@ namespace AmazonTests.Tests.E2E
             _homePage = new HomePage(Driver);
             _searchResultPage = new SearchResultPage(Driver);
             _productPage = new ProductPage(Driver);
+            _basketPage = new BasketPage(Driver);
 
             _homePage.Open();
             _homePage.AssertHomePageisLoaded();
@@ -37,10 +40,12 @@ namespace AmazonTests.Tests.E2E
             _homePage.SearchForBook(bookTitleSearch);
             _searchResultPage.VerifyFirstResultTitle(expectedBookTitle);
             expectedBookPrice = _searchResultPage.VerifyFirstResultHasPaperbackVersion(expectedBookVersion).Trim();
-            Console.WriteLine("price of search result is:" + expectedBookPrice);
             _searchResultPage.OpenFirstResultProduct();
             _productPage.SelectPaperbackVersion();
             _productPage.VerifyPaperBackVersionIsSelected(expectedBookTitle, expectedBookVersion, expectedBookPrice);
+            _productPage.AddProductToBasket();
+            _basketPage.MarkAddedProductAsGift();
+            _basketPage.VerifyProductIsAddedToBasketCorrectly("Basket subtotal (1 item): ", expectedBookPrice);
 
 
             Thread.Sleep(5000);

@@ -15,5 +15,11 @@ namespace AmazonTests.Pages.Product
             ClickOn(BOOK_VERSION_PAPERBACK);
             WaitUntilPageIsLoaded();
         }
+
+        public void AddProductToBasket()
+        {
+            ClickOn(ADD_TO_CART_BUTTON);
+            WaitUntilPageIsLoaded();
+        }
     }
 }
